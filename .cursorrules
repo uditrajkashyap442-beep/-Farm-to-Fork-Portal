@@ -1,0 +1,6 @@
+# Global AI Instructions
+
+1. **Strict Typing:** You must use strict TypeScript for all components and API routes. No `any` types.
+2. **Component Structure:** Place all reusable UI components in `/components/ui/`.
+3. **Error Handling:** All API routes must return a standard JSON error shape: `{ error: string, code: number }`.
+4. **Behavior:** Do NOT generate the entire application in one response. When I ask you to build a feature, outline the steps first, ask for confirmation, and then write the code for one file at a time.

@@ -1,0 +1,30 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Batch {
+  id             String    @id @default(uuid())
+  batch_number   String    @unique
+  vendor_name    String
+  mandi_location String
+  weight_tonnes  Float
+  status         String    @default("PENDING_QA") // "PENDING_QA", "APPROVED", "REJECTED"
+  created_at     DateTime  @default(now())
+  qa_result      QAResult?
+}
+
+model QAResult {
+  id               String   @id @default(uuid())
+  batch_id         String   @unique
+  batch            Batch    @relation(fields: [batch_id], references: [id], onDelete: Cascade)
+  moisture_percent Float
+  grain_length_mm  Float
+  broken_percent   Float
+  tested_by        String
+  tested_at        DateTime @default(now())
+}
